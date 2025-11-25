@@ -22,3 +22,8 @@ def to_rna(sequence):
     sequence = sequence.upper()
     rna_sequence = sequence.replace('T', 'U')
     return rna_sequence
+
+def complement_dna(sequence):
+    sequence = sequence.upper()
+    complement_sequence = ''.join(pairs[nucleotide] for nucleotide in sequence)
+    return complement_sequence
