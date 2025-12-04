@@ -27,3 +27,9 @@ def complement_dna(sequence):
     sequence = sequence.upper()
     complement_sequence = ''.join(pairs[nucleotide] for nucleotide in sequence)
     return complement_sequence
+
+def hamming_distance(seq1, seq2):
+    if len(seq1) != len(seq2):
+        raise ValueError("Sequences must be of equal length")
+    dist = sum(a != b for a, b in (zip(seq1, seq2)))
+    return dist
