@@ -93,3 +93,45 @@ def substring_indices(main_string, sub_string):
             indices.append(i+1)
     return ''.join(str(i) + " " for i in indices)
 
+def most_common_ancestor(data):
+    data = data.split('>')[1:]
+    res = []
+    for line in data:
+        lines = line.split('\n')
+        name = lines[0]
+        seq = ''.join(lines[1:])
+        res.append((name, seq))
+    dna = []
+    seq = []
+    A = []
+    C = []
+    G = []
+    T = []
+    consensus = ""
+    for line in res:
+        dna.append(line[1])
+    for i in range(len(dna[0])):
+        for j in range(len(dna)):
+            seq.append(dna[j][i])
+        Acount = seq.count('A')
+        Ccount = seq.count('C')
+        Gcount = seq.count('G')
+        Tcount = seq.count('T')
+        A.append(Acount)
+        C.append(Ccount)
+        G.append(Gcount)
+        T.append(Tcount)
+        consensus += max(('A', Acount), ('C', Ccount), ('G', Gcount), ('T', Tcount), key=lambda x: x[1])[0]
+        seq = []
+        Acount = 0
+        Ccount = 0
+        Gcount = 0
+        Tcount = 0
+    A = "A: " + ' '.join(str(i) for i in A)
+    C = "C: " + ' '.join(str(i) for i in C)
+    G = "G: " + ' '.join(str(i) for i in G)
+    T = "T: " + ' '.join(str(i) for i in T)
+    return consensus + "\n" + A + "\n" + C + "\n" + G + "\n" + T
+
+
+
