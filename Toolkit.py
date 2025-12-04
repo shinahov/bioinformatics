@@ -33,3 +33,12 @@ def hamming_distance(seq1, seq2):
         raise ValueError("Sequences must be of equal length")
     dist = sum(a != b for a, b in (zip(seq1, seq2)))
     return dist
+
+def prob_of_dominant_phenotype(p3, p2, p1):
+    total_offspring = p1 + p2 + p3
+    aaxaa = (p1 / total_offspring) * (p1 - 1) / (total_offspring - 1)
+    Aaxaa = (p1 / total_offspring) * (p2 / (total_offspring - 1))
+    Aaxaa += (p2 / total_offspring) * (p1 / (total_offspring - 1))
+    AaxAa = (p2 / total_offspring) * (p2 - 1) / (total_offspring - 1)
+    prob = 1 - (aaxaa + 0.5 * Aaxaa + 0.25 * AaxAa)
+    return prob
