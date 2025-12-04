@@ -85,4 +85,11 @@ def translate_rna(rna_sequence):
         protein_sequence.append(acid)
     return ''.join(protein_sequence)
 
+def substring_indices(main_string, sub_string):
+    indices = []
+    for i in range(len(main_string)- len(sub_string)):
+        #print(main_string[i:len(sub_string)+i])
+        if(main_string[i:len(sub_string)+i] == sub_string):
+            indices.append(i+1)
+    return ''.join(str(i) + " " for i in indices)
 
