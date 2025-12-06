@@ -133,5 +133,19 @@ def most_common_ancestor(data):
     T = "T: " + ' '.join(str(i) for i in T)
     return consensus + "\n" + A + "\n" + C + "\n" + G + "\n" + T
 
+def mortal_rabbits(months, months_to_live):
+    rabbits = [0] * months_to_live
+    rabbits[0] = 1
+    for month in range(1, months):
+        offsprings = sum(rabbits[1:])
+        rabbits = [0] + rabbits[:-1]
+        rabbits[0] += offsprings
+    return sum(rabbits)
+
+
+
+
+
+
 
 
