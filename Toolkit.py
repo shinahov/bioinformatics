@@ -1,4 +1,5 @@
 import collections
+from collections import defaultdict
 
 valid_nucleotides = {'A', 'C', 'G', 'T'}
 pairs = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
@@ -141,6 +142,33 @@ def mortal_rabbits(months, months_to_live):
         rabbits = [0] + rabbits[:-1]
         rabbits[0] += offsprings
     return sum(rabbits)
+
+def find_overlaps(data):
+    seq = {}
+    eqs = defaultdict(list)
+    eqp = defaultdict(list)
+    name = ""
+    for lines in data.splitlines():
+        if lines.startswith('>'):
+            name = lines[1:]
+            seq[name] = ""
+        else:
+            seq[name] += lines.strip()
+    for s in seq:
+        suf = seq[s][-3:]
+        pref = seq[s][:3]
+        eqs[suf].append(s)
+        eqp[pref].append(s)
+    overlaps = []
+    for suf in eqs:
+        if suf in eqp:
+            for a in eqs[suf]:
+                for b in eqp[suf]:
+                    if a != b:
+                        overlaps.append((a, b))
+    return overlaps
+
+
 
 
 
